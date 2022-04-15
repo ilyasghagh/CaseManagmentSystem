@@ -1,0 +1,186 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="/assets/vendors/iconly/bold.css">
+
+    <link rel="stylesheet" href="/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="~/assets/vendors/sweetalert2/sweetalert2.min.css">
+</head>
+
+<body>
+    <div id="app">
+        <div id="sidebar" class="active">
+            <div class="sidebar-wrapper active">
+                <div class="sidebar-header">
+                    <div class="d-flex justify-content-between">
+                        @*<div class="logo">
+                                <a href="index.html"><img src="~/assets/images/logo/logo.png" alt="Logo" srcset=""></a>
+                            </div>*@
+                        <div class="toggler">
+                            <a href="#" class="sidebar-hide d-xl-none d-block"><i class="bi bi-x bi-middle"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar-menu">
+                    <ul class="menu">
+                        <li class="sidebar-title">Menu</li>
+
+                        <li class="sidebar-item active">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class='sidebar-link'>
+                                <i class="bi bi-grid-fill"></i>
+                                <span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Manage Users</span>
+                            </a>
+                            <ul class="submenu ">
+                                @*<li class="submenu-item">
+                    <a href="#">Add New</a>
+                </li>*@
+                                <li class="submenu-item ">
+                                    <a hasp-area="Admin" asp-controller="User" asp-action="List">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Case Category</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="AddEdit">Add New</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="Index">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Police Stations</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="AddEditStation">Add New</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="StationList">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Manage Districts</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="AddEditDistrict">Add New</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="DistrictList">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Manage Courts</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="AddEditCourt">Add New</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Case" asp-action="CourtList">List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Manage Content</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="AddEditCarousel">Add New Slider</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="CarouselList">Slider List</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="AddEditTerms">Add New Terms</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="TermsList">Terms List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item  has-sub">
+                            <a href="#" class='sidebar-link'>
+                                <i class="bi bi-stack"></i>
+                                <span>Manage Locations</span>
+                            </a>
+                            <ul class="submenu ">
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="AddEditProvince">Add New Province</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="ProvinceList">Province List</a>
+                                </li>
+                                <li class="submenu-item">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="AddEditCity">Add New City</a>
+                                </li>
+                                <li class="submenu-item ">
+                                    <a asp-area="Admin" asp-controller="Common" asp-action="CityList">City List</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item">
+                            <a asp-area="" asp-action="Logout" asp-controller="User" class='sidebar-link'>
+                                <i class="bi bi-file-earmark-medical-fill"></i>
+                                <span>Logot</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+            </div>
+        </div>
+        @RenderBody()
+    </div>
+    <script src="/assets/vendors/jquery/jquery.min.js"></script>
+    <script src="/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+    <script src="/assets/vendors/jquery-datatables/jquery.dataTables.min.js"></script>
+    <script src="/assets/vendors/jquery-datatables/custom.jquery.dataTables.bootstrap5.min.js"></script>
+    <script src="/assets/vendors/fontawesome/all.min.js"></script>
+    <script src="/assets/js/mazer.js"></script>
+    <script src="~/assets/js/extensions/sweetalert2.js"></script>
+    <script src="~/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

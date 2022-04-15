@@ -1,0 +1,61 @@
+﻿@model Case.web.Areas.Admin.Models.CarouselModel
+<div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+
+    <div class="page-content">
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+
+                    </div>
+
+                </div>
+            </div>
+            <section class="section">
+                <div class="card">
+
+                    <div class="card-body">
+                        <form asp-action="AddEditCarousel" asp-controller="Common" role="form" enctype="multipart/form-data">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            @if (Model.Id > 0)
+                                @Html.HiddenFor(x => x.Id)
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Title, new { @class = "col-lg-8 control-label" })
+                                @Html.TextBoxFor(m => m.Title, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.Title, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.SliderText, new { @class = "col-lg-8 control-label" })
+                                @Html.TextBoxFor(m => m.SliderText, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.SliderText, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="FormFile"></label>
+                                <input type="file" asp-for="FormFile" class="form-control">
+                            </div>
+                            @if (Model.Id > 0)
+                            {
+                                <div>
+                                    <img src="~/Carosel/@Model.ImageName" />
+                                </div>
+                            }
+                            <div class="form-group">
+                                <button type="submit" id="btnSubmit" class="btn btn-success">@(Model.Id > 0 ? "Update" : "Add")</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

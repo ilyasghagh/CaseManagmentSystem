@@ -1,0 +1,113 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpcontext
+@using System.Security.Claims;
+@{
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CaseManagment</title>
+    <link rel="stylesheet" href="~/assets/css/bootstrap.css">
+
+    <link rel="stylesheet" href="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="~/assets/vendors/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/assets/css/app.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/assets/vendors/sweetalert2/sweetalert2.min.css">
+</head>
+<body>
+    <style>
+        .center {
+            margin: 10px auto;
+            width: 60%;
+            border: 3px solid black;
+            padding: 10px;
+            text-align: center;
+            background: black;
+            color: white;
+        }
+        .navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+            color:orange !important;
+        }
+    </style>
+    <header>      
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                @*<a href="#" class="navbar-brand">Brand</a>*@
+                <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav">
+                        @if (httpcontext.HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            var role = httpcontext.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).SingleOrDefault().ToLower();
+
+                            @if (role.Equals("lawyer"))
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Lawyer" asp-action="Index">Home</a>
+                            }
+                        }
+                        else
+                        {
+                            <a asp-controller="Home" asp-action="Index" class="nav-item nav-link text-dark">Home</a>
+                        }
+
+                        <a href="#" class="nav-item nav-link text-dark">About Us</a>                      
+                    </div>
+
+                   
+                    <div class="navbar-nav ms-auto">
+                        <a href="#" class="nav-item nav-link text-dark">Contact Us</a>
+                        @if (httpcontext.HttpContext.User.Identity.IsAuthenticated)
+                        {
+                            <div class="nav-item dropdown">
+                                <a href="#" class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown">@httpcontext.HttpContext.User.Claims.Where(x => x.Type == "FullName").Select(x => x.Value).SingleOrDefault()<span><i class="bi bi-caret-down-fill"></i></span></a>
+                                <div class="dropdown-menu">
+                                    <a href="/User/UserProfile/@httpcontext.HttpContext.User.Claims.Where(x => x.Type == "Id").Select(x => x.Value).SingleOrDefault()" class="dropdown-item">Profile</a>
+                                    <a href="/User/ChangePassword" class="dropdown-item">Change Password</a>
+                                    <a href="/User/Logout" class="dropdown-item">Logout</a>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="navbar-nav ms-auto">
+                                <a href="/User/Login" class="nav-link text-dark">Login</a>
+                            </div>
+                            <div class="navbar-nav ms-auto">
+                                <a href="/User/Register" class="nav-link text-dark">Register</a>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - CaseManagment - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/extensions/sweetalert2.js"></script>
+    <script src="~/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
+    <script src="~/assets/js/mazer.js"></script>
+    <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3/jquery.inputmask.bundle.js"></script>
+    <script src="~/js/jquery.inputmask.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

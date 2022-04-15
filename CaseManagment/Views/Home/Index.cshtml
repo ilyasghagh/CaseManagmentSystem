@@ -1,0 +1,20 @@
+﻿@inject Microsoft.AspNetCore.Http.IHttpContextAccessor httpcontext
+@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    @if (httpcontext.HttpContext.User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Welcome @httpcontext.HttpContext.User.Claims.Where(x => x.Type == "FullName").Select(x => x.Value).SingleOrDefault() to E-Case Management System </h1>
+        <h1>You are logged in as @httpcontext.HttpContext.User.Claims.Where(x => x.Type == ClaimTypes.Role).Select(x => x.Value).SingleOrDefault()</h1>
+    }
+    else
+    {
+        <h1 class="display-4">Welcome to E-Case Management System </h1>
+    }
+
+</div>
+@(await Component.InvokeAsync("Carousel"))
+

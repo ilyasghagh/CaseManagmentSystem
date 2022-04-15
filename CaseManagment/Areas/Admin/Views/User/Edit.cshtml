@@ -1,0 +1,160 @@
+﻿@model Case.web.Areas.Admin.Models.UserModel 
+<div id="main">
+    <header class="mb-3">
+        <a href="#" class="burger-btn d-block d-xl-none">
+            <i class="bi bi-justify fs-3"></i>
+        </a>
+    </header>
+
+    <div class="page-heading">
+        <h3>Editing @Model.FirstName @Model.LastName Info </h3>
+    </div>
+    <div class="page-content">
+        <div class="page-heading">
+            <div class="page-title">
+                <div class="row">
+                    <div class="col-12 col-md-6 order-md-1 order-last">
+                        @*<h3>Input</h3>
+                        <p class="text-subtitle text-muted">
+                            Give textual form controls like input upgrade with custom styles,
+                            sizing, focus states, and more.
+                        </p>*@
+                    </div>
+                    @*<div class="col-12 col-md-6 order-md-2 order-first">
+                        <nav aria-label="breadcrumb" class="breadcrumb-header float-start float-lg-end">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Input</li>
+                            </ol>
+                        </nav>
+                    </div>*@
+                </div>
+            </div>
+            <section class="section">
+                <div class="card">
+                    @*<div class="card-header">
+                        <h4 class="card-title">Basic Inputs</h4>
+                    </div>*@
+
+                    <div class="card-body">
+                        <form asp-action="Edit" asp-controller="User" role="form">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            @Html.HiddenFor(x => x.Id)
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.FirstName, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.LastName, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.Email, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.Phone, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.Phone, new { @class = "form-control", @type = "number", @placeholder = "Enter Phone " })
+                                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                    @*<div class="col">
+                    @Html.LabelFor(m => m.Password, new { @class = "col-lg-8 control-label" })
+                    @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", @placeholder = "Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+                <div class="col">
+                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-lg-8 control-label" })
+                    @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @type = "password", @placeholder = "Confirm Password" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>*@
+                                </div>
+
+                            </div>
+
+                            @*<div class="form-group">
+            <div class="row">
+                @foreach (var item in Model.roles)
+                {
+                    <div class="col">
+                        <label class="form-check-label"><input type="checkbox" name="selectedRoles" value="@item.Value" @(Model.selectedRoles.Contains(Convert.ToInt32(item.Value)) ? "checked" : "")><span style="margin-left:5px;"> @item.Text </span></label>
+                    </div>
+                }
+            </div>
+        </div>*@
+                            <div class="form-group">
+                                @Html.LabelFor(m => m.Address, new { @class = "col-lg-8 control-label" })
+                                @Html.TextAreaFor(m => m.Address, new { @class = "form-control", @placeholder = "Enter address" })
+                                @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        Male
+                                        @Html.RadioButtonFor(model => model.Gender, "Male", new { @checked = "checked" })
+
+                                    </div>
+                                    <div class="col">
+                                        Female
+                                        @Html.RadioButtonFor(model => model.Gender, "Female")
+                                    </div>
+                                    <div class="col">
+                                        Others
+                                        @Html.RadioButtonFor(model => model.Gender, "Others")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.DateOfBirth, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.DateOfBirth, new { @class = "form-control", @type = "date" })
+                                        @Html.ValidationMessageFor(m => m.DateOfBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                    <div class="col">
+                                        @Html.LabelFor(m => m.FailedLoginAttempts, new { @class = "col-lg-8 control-label" })
+                                        @Html.TextBoxFor(m => m.FailedLoginAttempts, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.FailedLoginAttempts, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col">
+                                        IsActive
+                                        @Html.CheckBoxFor(model => model.IsActive)
+
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Created Date</label>
+                                        <p>@Model.CreatedDateUtc</p>
+
+                                    </div>
+                                    <div class="col">
+                                        <label class="form-label">Updated Date</label>
+                                        <p>@Model.UpdatedDateUtc</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" id="btnSubmit" class="btn btn-success">Update</button>
+                            </div>
+                        </form>                      
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

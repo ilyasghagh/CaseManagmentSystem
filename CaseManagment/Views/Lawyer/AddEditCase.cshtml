@@ -1,0 +1,231 @@
+﻿@model Case.web.Models.CaseViewModel
+<style>
+    .center-btn {
+        width: 60%;
+        padding: 10px;
+        text-align: center;
+    }
+</style>
+<div class="center">
+    @if (Model.Id > 0)
+    {
+
+        <h4 style="color:white;">Editing case</h4>
+    }
+    else
+    {
+        <h4 style="color:white;">Adding a new case</h4>
+    }
+
+</div>
+<form asp-action="AddEditCase" asp-controller="Lawyer" method="post" enctype="multipart/form-data">
+    @if (Model.Id > 0)
+        @Html.HiddenFor(x => x.Id)
+    <div class="col-md-12" style="display:inline-flex;">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cnic"></label>
+                <input asp-for="Cnic" class="form-control cnicmask" data-inputmask="'mask': '99999-9999999-9'" placeholder="XXXXX-XXXXXXX-X">
+                <span asp-validation-for="Cnic" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Mobile"></label>
+                <input asp-for="Mobile" class="form-control" type="number">
+                <span asp-validation-for="Mobile" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Address"></label>
+                <textarea asp-for="Address" class="form-control"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProvinceId"></label>
+                <select asp-for="ProvinceId" asp-items="Model.ProvinceList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="ProvinceId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CityId"></label>
+                <select asp-for="CityId" asp-items="Model.CityList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="CityId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CategoryId"></label>
+                <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control">
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DistrictId"></label>
+                <select asp-for="DistrictId" asp-items="Model.DistrictList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="DistrictId" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="ClientId"></label>
+                <select asp-for="ClientId" asp-items="Model.ClientList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="ClientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LawyerId"></label>
+                <select asp-for="LawyerId" asp-items="Model.LaywersList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="LawyerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="JudgeId"></label>
+                <select asp-for="JudgeId" asp-items="Model.JudgeList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="JudgeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CourtId"></label>
+                <select asp-for="CourtId" asp-items="Model.CourtList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="CourtId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="HearingDate"></label>
+                <input asp-for="HearingDate" class="form-control" />
+                <span asp-validation-for="HearingDate" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="FirNo"></label>
+                        <input asp-for="FirNo" class="form-control">
+                        <span asp-validation-for="FirNo" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label asp-for="FirYear"></label>
+                        <select asp-for="FirYear" asp-items="Model.YeaList" class="form-control">
+                            <option value="0">---Select---</option>
+                        </select>
+                        <span asp-validation-for="FirYear" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="PoliceStationId"></label>
+                <select asp-for="PoliceStationId" asp-items="Model.StationList" class="form-control">
+                    <option value="0">---Select---</option>
+                </select>
+                <span asp-validation-for="PoliceStationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CaseDetail"></label>
+                <textarea asp-for="CaseDetail" class="form-control"></textarea>
+                <span asp-validation-for="CaseDetail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FormFiles"></label>
+                <input type="file" asp-for="FormFiles" class="form-control" multiple>
+            </div>
+        </div>
+
+    </div>
+    <div style="margin:25px auto;width:10%">
+        @if (Model.Id > 0)
+        {
+            <input type="submit" value="Update" class="btn btn-success" style="padding:10px 50px;" />
+        }
+        else
+        {
+            <input type="submit" value="Save" class="btn btn-success" style="padding:10px 50px;" />
+        }
+
+    </div>
+</form>
+
+@if (Model.Id > 0)
+{
+    <div class="card">
+        <div class="card-header">
+            Attaced Files
+        </div>
+        <div class="card-body">
+            @if (Model.FilesAttached.Count > 0)
+            {
+                <ul>
+                    @foreach (var item in Model.FilesAttached)
+                    {
+                        <li id="file-with-@item.FileId" style="margin-bottom:25px;">
+                            <span> @item.FileName</span>
+                            <a href="@item.FilePath" target="_blank" class="btn btn-primary" style="float:right;margin-left:10px;">View</a>
+                            <a href="javascript:void(0)" class="btn btn-danger" style="float:right;margin-left:10px;" onclick="Delete(@(item.FileId))">Delete</a>
+                            <a href="/Lawyer/DownloadDocument/@item.FileId" class="btn btn-success" style="float:right;">Download</a>
+                        </li>
+                    }
+                </ul>
+            }
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script>
+        $(document).ready(function () {        
+            $("#Cnic").inputmask();
+            $("#ProvinceId").on('change', function () {
+                var Id = parseInt($(this).val())                
+                var url = "/Lawyer/GetCityList";
+                $.getJSON(url, { ProvinceId: Id }, function (data) {
+                    var items = '<option value="0">---Select---</option>';
+                    $("#CityId").empty();
+                    $.each(data, function (i, city) {
+                        items += '<option value="' + city.value + '">' + city.text + '</option>';
+                    });
+                    $("#CityId").append(items);
+                });
+            })
+        });
+        function Delete(id) {
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $("#file-with-" + id).remove();
+                    $.ajax({
+                        type: "GET",
+                        url: "/Lawyer/DeleteFile?id=" + id,
+                        success: function (response) {
+
+                        }
+                    })
+                }
+            })
+        }
+    </script>
+}
+

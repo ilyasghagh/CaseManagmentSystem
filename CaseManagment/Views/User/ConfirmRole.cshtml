@@ -1,0 +1,50 @@
+﻿@model Case.web.Models.CustomerRoleSelectorModel
+
+
+
+<section class="vh-100">
+    <form asp-action="ConfirmRole" asp-controller="User">
+        @Html.HiddenFor(x => x.userId);
+        <div class="container py-5 h-100">
+            <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+                    <div class="card shadow-2-strong" style="border-radius: 1rem;">
+                        <div class="card-body p-5 text-center">
+
+                            <h3 class="mb-5">Select Role for Login</h3>
+                            <div class="form-outline mb-4">
+                                <select class="form-control" asp-for="roleId">
+                                    @foreach (var item in Model.roles)
+                                    {
+                                        <option value="@item.Value"> @item.Text</option>
+                                    }
+                                </select>
+                            </div>
+                            <button class="btn btn-primary btn-lg btn-block" type="submit">Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</section>
+
+@if(!string.IsNullOrEmpty(ViewBag.roleActive))
+{
+@section Scripts{
+    <script>
+            Swal.fire({
+                icon: 'fail',
+                title: 'Not Active',
+                text: 'You cannot login because role is not active. Please contact admin for activation',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false,
+            }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                //if (result.isConfirmed) {
+                //    window.location.href = "/";
+                //}
+            })
+    </script>
+}
+}
